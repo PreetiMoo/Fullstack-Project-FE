@@ -13,7 +13,7 @@ const CustLogin = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post('https://fullstack-project-be.vercel.app/login/customer', {
+      const response = await axios.post(`${process.env.API_URL}/login/customer`, {
         username,
         password,
       });
@@ -62,8 +62,11 @@ const CustLogin = () => {
           />
         </div>
         <button type="submit">Login</button>
+        
+
       </form>
       {error && <p className="error-message">{error}</p>}
+      <a href='/bankerLogin' type="submit" style={{textDecoration:'none'}}>Banker Login</a>
     </div>
     </div>
     

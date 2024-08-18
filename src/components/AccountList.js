@@ -18,7 +18,7 @@ const AccountList = () => {
     
     const fetchAccounts = async () => {
       try {
-        const response = await axios.get('https://fullstack-project-be.vercel.app/accounts', {
+        const response = await axios.get(`${process.env.API_URL}/accounts`, {
           headers: { Authorization: `Bearer ${localStorage.getItem('accessToken')}` }
         });
         setAccounts(response.data);
@@ -34,7 +34,7 @@ const AccountList = () => {
   const handleAccountClick = async (accountId) => {
     try {
       
-      const response = await axios.get(`https://fullstack-project-be.vercel.app/transactions/banker/${accountId}`, {
+      const response = await axios.get(`${process.env.API_URL}/transactions/banker/${accountId}`, {
         headers: { Authorization: `Bearer ${localStorage.getItem('accessToken')}` }
       });
       setTransactions(response.data);
@@ -60,7 +60,7 @@ const AccountList = () => {
     }
 
     try {
-      await axios.post(`https://fullstack-project-be.vercel.app/${transactionType}`, {
+      await axios.post(`${process.env.API_URL}/${transactionType}`, {
         amount: parsedAmount
       }, {
         headers: { Authorization: `Bearer ${localStorage.getItem('accessToken')}` }
@@ -68,7 +68,7 @@ const AccountList = () => {
 
       
       
-      const transactionsResponse = await axios.get(`https://fullstack-project-be.vercel.app/transactions/banker/${selectedAccount}`, {
+      const transactionsResponse = await axios.get(`${process.env.API_URL}/transactions/banker/${selectedAccount}`, {
         headers: { Authorization: `Bearer ${localStorage.getItem('accessToken')}` }
       });
       setTransactions(transactionsResponse.data);
@@ -120,11 +120,7 @@ const AccountList = () => {
             </Row>
             <Row>
               <Col><strong>Balance:</strong></Col>
-              <Col>${account.balance}</Col>
-            </Row>
-            <Row>
-              <Col><strong>Type:</strong></Col>
-              <Col>{account.usertype}</Col>
+              <Col>{account.balance} Rs.</Col>
             </Row>
           </ListGroupItem>
         ))}
