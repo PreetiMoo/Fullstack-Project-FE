@@ -1,0 +1,74 @@
+
+.transfer-container {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .transaction-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .transaction-list li {
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .buttons {
+    margin-top: 20px;
+  }
+  
+  .buttons button {
+    margin-right: 10px;
+  }
+  
+  .error-message {
+    color: red;
+    margin-top: 10px;
+  }
+  
+  
+  .ReactModal__Overlay {
+    z-index: 1000;
+  }
+  
+  .ReactModal__Content {
+    max-width: 400px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .transaction-table {
+    width: 100%;
+    margin: auto;
+  }
+  
+  .transaction-table th,
+  .transaction-table td {
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  .buttons {
+    width: 100%;
+    max-width: 600px; 
+    margin: auto;
+  }
+  
+  button {
+    flex: 1; 
+    margin: 5px;
+  }
+  
+  button:last-child {
+    flex: none; 
+  }
+  
+  
