@@ -28,7 +28,7 @@ const Transfer = () => {
       const token = localStorage.getItem('accessToken');
       console.log('Fetching transactions with token:', token);
 
-      const response = await axios.get('http://localhost:8000/transactions/cust', 
+      const response = await axios.get('https://fullstack-project-be.vercel.app/transactions/cust', 
         {
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -47,7 +47,7 @@ const Transfer = () => {
   const fetchBalance = async () => {
     try {
       const token = localStorage.getItem('accessToken');
-      const response = await axios.get('http://localhost:8000/balance', {
+      const response = await axios.get('https://fullstack-project-be.vercel.app/balance', {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (response.data && response.data.balance !== undefined) {
@@ -65,7 +65,7 @@ const Transfer = () => {
     try {
       const token = localStorage.getItem('accessToken');
       await axios.post(
-        'http://localhost:8000/transfers/deposit',
+        'https://fullstack-project-be.vercel.app/transfers/deposit',
         { amount },
         {
           headers: { Authorization: `Bearer ${token}` },
@@ -85,7 +85,7 @@ const Transfer = () => {
     try {
       const token = localStorage.getItem('accessToken');
       await axios.post(
-        'http://localhost:8000/transfers/withdrawal',
+        'https://fullstack-project-be.vercel.app/transfers/withdrawal',
         { amount },
         {
           headers: { Authorization: `Bearer ${token}` },

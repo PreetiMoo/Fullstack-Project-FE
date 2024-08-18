@@ -13,7 +13,7 @@ const CustLogin = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8000/login/customer', {
+      const response = await axios.post('https://fullstack-project-be.vercel.app/login/customer', {
         username,
         password,
       });
