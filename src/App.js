@@ -5,6 +5,7 @@ import CustLogin from './components/CustomerLogin';
 import BankerLogin from './components/BankerLogin';
 import Transfer from './components/Transfer';
 import AccountList from './components/AccountList';
+import CustReg from './components/CustomerRegister';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
@@ -17,6 +18,7 @@ function App() {
           <Route path="/bankerLogin" element={<BankerLogin />} />
           <Route path="/accountlist" element={< AccountList/>} />
           <Route path="/transfer" element={<PrivateRoute><Transfer /></PrivateRoute>} />
+          <Route path="/custReg" element={<CustReg/>} />
 
           <Route path="*" element={<Navigate to="/custLogin" />} />
         </Routes>

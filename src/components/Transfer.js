@@ -28,7 +28,7 @@ const Transfer = () => {
       const token = localStorage.getItem('accessToken');
       console.log('Fetching transactions with token:', token);
 
-      const response = await axios.get(`${process.env.API_URL}/transactions/cust`, 
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/transactions/cust`, 
         {
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -47,7 +47,7 @@ const Transfer = () => {
   const fetchBalance = async () => {
     try {
       const token = localStorage.getItem('accessToken');
-      const response = await axios.get(`${process.env.API_URL}/balance`, {
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/balance`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (response.data && response.data.balance !== undefined) {
@@ -65,7 +65,7 @@ const Transfer = () => {
     try {
       const token = localStorage.getItem('accessToken');
       await axios.post(
-        `${process.env.API_URL}/transfers/deposit`,
+        `${process.env.REACT_APP_API_URL}/transfers/deposit`,
         { amount },
         {
           headers: { Authorization: `Bearer ${token}` },
@@ -85,7 +85,7 @@ const Transfer = () => {
     try {
       const token = localStorage.getItem('accessToken');
       await axios.post(
-        `${process.env.API_URL}/transfers/withdrawal`,
+        `${process.env.REACT_APP_API_URL}/transfers/withdrawal`,
         { amount },
         {
           headers: { Authorization: `Bearer ${token}` },

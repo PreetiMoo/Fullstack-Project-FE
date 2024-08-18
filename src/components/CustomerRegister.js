@@ -4,42 +4,38 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './Login.css';
 
-const CustLogin = () => {
+const CustReg = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post(`${process.env.REACT_APP_API_URL}/login/customer`, {
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/register/cust`, {
         username,
         password,
+        email,
       });
-
-      
-      const { accessToken, usertype } = response.data;
-
-      if (accessToken && usertype) {
-        
-        localStorage.setItem('accessToken', accessToken);
-        localStorage.setItem('usertype', usertype);
-
-        
-        navigate('/transfer');
-      }  else {
-        setError('Login failed. Please try again.');
+  
+      if (response.status === 201) {
+        alert('User created successfully!');
+        navigate('/custLogin'); 
+      }
+      else{
+        alert('User creation failed!');
       }
     } catch (err) {
-      setError('Login failed. Please check your username and password.');
+      setError('Registration failed. Please check your input.');
     }
   };
 
   return (
     <div style={{display:'flex',justifyContent:'center', alignItems:'center', height: '100vh'}}>
       <div className="login-container">
-      <h2>Customer Login</h2>
+      <h2>Customer Sign Up</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="username">Username</label>
@@ -48,6 +44,16 @@ const CustLogin = () => {
             id="username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="email">Email</label>
+          <input
+            type="text"
+            id="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             required
           />
         </div>
@@ -61,17 +67,17 @@ const CustLogin = () => {
             required
           />
         </div>
-        <button type="submit">Login</button>
+        
+        <button type="submit">Sign Up</button>
         
 
       </form>
       {error && <p className="error-message">{error}</p>}
-      <a href='/custReg' style={{marginRight:"5rem"}}>Customer Sign Up</a>
-      <a href='/bankerLogin'>Banker Login</a>
+      <a href='/custLogin'>Customer Login</a>
     </div>
     </div>
     
   );
 };
 
-export default CustLogin;
+export default CustReg;
