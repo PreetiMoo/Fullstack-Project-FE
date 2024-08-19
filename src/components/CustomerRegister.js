@@ -10,6 +10,23 @@ const CustReg = () => {
   const [email, setEmail] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const [emailError, setEmailError] = useState('');
+  
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const handleEmailChange = (e) => {
+    const newEmail = e.target.value;
+    setEmail(newEmail);
+
+    if (newEmail === '' || validateEmail(newEmail)) {
+      setEmailError('');
+    } else {
+      setEmailError('Invalid email format');
+    }
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -28,7 +45,14 @@ const CustReg = () => {
         alert('User creation failed!');
       }
     } catch (err) {
-      setError('Registration failed. Please check your input.');
+      console.log(err)
+      if(err.response && err.response.data && err.response.data.error){
+        setError(err.response.data.error)
+      }
+      else{
+        setError('Registration failed. Please check your input.');
+      }
+      
     }
   };
 
@@ -48,15 +72,16 @@ const CustReg = () => {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="email">Email</label>
-          <input
-            type="text"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
+      <label htmlFor="email">Email</label>
+      <input
+        type="text"
+        id="email"
+        value={email}
+        onChange={handleEmailChange}
+        required
+      />
+      {emailError && <p className="error-message">{emailError}</p>}
+    </div>
         <div className="form-group">
           <label htmlFor="password">Password</label>
           <input
