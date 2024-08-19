@@ -77,7 +77,13 @@ const Transfer = () => {
       await fetchBalance();
     } catch (err) {
       console.error('Error depositing amount:', err);
-      setError('Deposit failed. Please try again.');
+      if(err.response && err.response.data && err.response.data.error){
+        setError(err.response.data.error)
+      }
+      else{
+        setError('Deposit failed. Please try again.');
+      }
+      
     }
   };
 
@@ -97,7 +103,13 @@ const Transfer = () => {
       await fetchBalance();
     } catch (err) {
       console.error('Error withdrawing amount:', err);
-      setError('Insufficient Balance.');
+      if(err.response && err.response.data && err.response.data.error){
+        setError(err.response.data.error)
+      }
+      else{
+        setError('Insufficient Balance.');
+      }
+      
     }
   };
 
@@ -165,17 +177,32 @@ const Transfer = () => {
             <Form.Control
               type="number"
               value={amount}
-              onChange={(e) => setAmount(e.target.value)}
+              onChange={(e) => {
+                const value = e.target.value;
+                if (value >= 0 || value === "") { 
+                  setAmount(value);
+                }
+              }}
               required
             />
+
           </Form.Group>
           {error && <Alert variant="danger" className="mt-3">{error}</Alert>}
-          <Button variant="primary" type="submit" className="mt-3">
-            {modalType === 'deposit' ? 'Deposit' : 'Withdraw'}
-          </Button>
+          
         </Form>
       </Modal.Body>
-      <Modal.Footer>
+      <Modal.Footer style={{display:"flex", justifyContent:"space-between"}}>
+        {modalType === 'deposit' ? 
+        <Button  variant="primary" type="submit"  onClick={() => {handleDeposit()}}>
+        Deposit
+        </Button>
+       :
+      <Button  variant="warning" type="submit"  onClick={() => {handleWithdrawal()}
+        
+      }>Withdrawal</Button>
+        }
+      
+           
         <Button variant="secondary" onClick={closeModal}>Close</Button>
       </Modal.Footer>
     </Modal>
